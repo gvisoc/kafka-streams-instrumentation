@@ -37,10 +37,10 @@ To run the example, proceed in this order:
 
 It is easy to verify the applications works in the logs --there are currently no tests in this repository. 
 
-The Jaeger UI is accessible at `http://localhost:16686/search`.
+The Jaeger UI is accessible at [http://localhost:16686](http://localhost:16686).
 
 ## Conclusions
-Stateful operations on Kafka Streams, like joins, are not propagating all needed headers through RocksDB. By running this example we can see that the end to end obserbability is broken with the current scenario. Stateless operations or 1:1 processes are presumably OK.
+Stateful operations on Kafka Streams, like joins, are not propagating all needed headers through RocksDB. By running this example we can see that the end to end observability is broken with the current scenario. Stateless operations or 1:1 processes are presumably OK.
 
 See also: 
 - [KAFKA-7718](https://issues.apache.org/jira/browse/KAFKA-7718) on the Apache Software Foundation Jira.
