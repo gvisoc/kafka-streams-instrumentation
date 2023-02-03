@@ -31,7 +31,7 @@ To run the example, proceed in this order:
 2. Create the topics by running `./create-topics.sh`.
 3. Compile and package the three applications, running `mvn package` inside each subdirectory `kafka-{producer/consumer/join}`
 4. Run each of the applications: 
-   - `kafka-client/run-otel.sh`
+   - `kafka-consumer/run-otel.sh`
    - `kafka-join/run-otel.sh`
    - `kafka-producer/run-otel.sh`
 
