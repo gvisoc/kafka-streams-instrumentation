@@ -30,10 +30,10 @@ To run the example, proceed in this order:
 1. Create the Kafka Cluster and the Jaeger server by running `docker compose up -d` on this directory.
 2. Create the topics by running `./create-topics.sh`.
 3. Compile and package the three applications, running `mvn package` inside each subdirectory `kafka-{producer/consumer/join}`
-4. Run each of the applications: 
-   - `kafka-consumer/run-otel.sh`
-   - `kafka-join/run-otel.sh`
-   - `kafka-producer/run-otel.sh`
+4. Run each of the applications bu running `otel.sh` under the three applications: 
+   - `kafka-consumer`
+   - `kafka-join`
+   - `kafka-producer`
 
 It is easy to verify the applications works in the logs --there are currently no tests in this repository. 
 
