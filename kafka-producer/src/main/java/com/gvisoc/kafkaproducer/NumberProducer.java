@@ -9,6 +9,8 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
 import org.springframework.kafka.support.SendResult;
 
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
+import java.util.function.BiConsumer;
 
 @Service
 public class NumberProducer {
@@ -20,16 +22,16 @@ public class NumberProducer {
     private KafkaTemplate<String, String> kafkaTemplate;
 
     public void sendMessage(String key, String value) {
-        ListenableFuture<SendResult<String, String>> future = kafkaTemplate.send(TOPIC, key, value);
-        future.addCallback(new ListenableFutureCallback<SendResult<String, String>>() {
-            @Override
-            public void onSuccess(SendResult<String, String> result) {
+        CompletableFuture<SendResult<String, String>> future = kafkaTemplate.send(TOPIC, key, value);
+
+        future.whenComplete((stringStringSendResult, throwable) -> {
+            if (throwable == null) {
                 logger.info(String.format("Produced event to topic %s: key = %-10s value = %s", TOPIC, key, value));
             }
-
-            @Override
-            public void onFailure(Throwable ex) {
-                ex.printStackTrace();
+            else {
+                logger.error("Received throwable with message: {}. Throwing RuntimeException.",
+                        throwable.getMessage());
+                throw new RuntimeException(throwable);
             }
         });
     }

@@ -1,6 +1,10 @@
 # Instrumentation of Kafka Streams
 This repo is a small PoC to see in Jaeger how the Open Telemetry traces are propagated and represented when joining 2 streams.
 
+## Requirements
+- Docker Engine (recent, current)
+- OpenJDK 17 and `JAVA_HOME` configured --the projects already have Maven Wrapper.
+
 ## Application
 The end to end application consists in three Spring Boot applications. These applications send data to each other through a local Kafka cluster (on Docker), and they  instrumented with Open Telemetry.
 1. A Kafka producer creating 2 topics, one with a number and another one with whether the number is odd or even. 
@@ -22,15 +26,16 @@ java -javaagent:../opentelemetry-javaagent.jar \
       -Dotel.traces.exporter=jaeger \
       -Dotel.metrics.exporter=none \
       -Dotel.instrumentation.messaging.experimental.receive-telemetry.enabled=true \
+      -Dotel.propagators=tracecontext,baggage,jaeger \
       -jar ./target/kafka-join-0.0.1-SNAPSHOT.jar
 ```
 
 ## Run the example
-To run the example, proceed in this order:
+To run the example, run `./start-poc.sh` or, alternatively, proceed in this order:
 1. Create the Kafka Cluster and the Jaeger server by running `docker compose up -d` on this directory.
 2. Create the topics by running `./create-topics.sh`.
 3. Compile and package the three applications, running `mvn package` inside each subdirectory `kafka-{producer/consumer/join}`
-4. Run each of the applications bu running `otel.sh` under the three applications: 
+4. Run each of the applications bu running `./run-otel.sh` under the three applications: 
    - `kafka-consumer`
    - `kafka-join`
    - `kafka-producer`
