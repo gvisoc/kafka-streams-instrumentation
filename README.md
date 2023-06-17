@@ -22,7 +22,7 @@ An example of the Open Telemetry Agent usage is in the `run-otel.sh` script that
 ```bash
 #!/bin/bash
 java -javaagent:../opentelemetry-javaagent.jar \
-      -Dotel.service.name=kafka-streams-join-poc \
+      -Dotel.service.name=kafka-join \
       -Dotel.traces.exporter=jaeger \
       -Dotel.metrics.exporter=none \
       -Dotel.instrumentation.messaging.experimental.receive-telemetry.enabled=true \
