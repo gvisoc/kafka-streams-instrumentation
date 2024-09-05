@@ -1,4 +1,7 @@
-# Instrumentation of Kafka Streams
+# Instrumentation of Kafka Streams (archived due end of life)
+> **Warning**
+> This repository is **archived** and no longer maintained.
+ 
 This repo is a small PoC to see in Jaeger how the Open Telemetry traces are propagated and represented when joining 2 streams.
 
 ## Requirements
